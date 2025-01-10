@@ -3,11 +3,11 @@
 
 /*
 This header file declares bus independent constants and data types as defined by the
-fmi-ls-bus layered standard specification (https://github.com/modelica/fmi-ls-bus).
+FMI-LS-BUS layered standard specification (https://github.com/modelica/fmi-ls-bus).
 
-It should be used when creating Network FMUs according to the fmi-ls-bus layered standard.
+It should be used when creating Network FMUs according to the FMI-LS-BUS layered standard.
 
-Copyright (C) 2024 Modelica Association Project "FMI"
+Copyright (C) 2023-2025 Modelica Association Project "FMI"
               All rights reserved.
 
 This file is licensed by the copyright holders under the 2-Clause BSD License
@@ -37,6 +37,7 @@ OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ----------------------------------------------------------------------------
 */
+
 #if !defined(FMI3_LS_BUS_CHECK_OPERATION_SIZE)
 #if (defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)) || (defined(__cplusplus) && (__cplusplus >= 201103L))
 #define FMI3_LS_BUS_CHECK_OPERATION_SIZE 1
@@ -44,6 +45,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FMI3_LS_BUS_CHECK_OPERATION_SIZE 0
 #endif
 #endif
+
 
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L) && (FMI3_LS_BUS_CHECK_OPERATION_SIZE == 1)
 #include <assert.h>
@@ -57,18 +59,37 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma warning(disable : 4815)
 #endif
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4200)
+#pragma warning(disable : 4815)
+#endif
+
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
+
 /**
- * \brief Defines the value 'TRUE' of the fmi-ls-bus. 
+ * Common data types.
+ */
+
+/**
+ * \brief Data type representing a boolean value.
+ *
+ * \note The only valid values are FMI3_LS_BUS_TRUE and FMI3_LS_BUS_FALSE.
+ */
+typedef fmi3UInt8 fmi3LsBusBoolean;
+
+/**
+ * \brief Defines the value 'TRUE' of the FMI-LS-BUS.
  */
 #define FMI3_LS_BUS_TRUE ((fmi3UInt8)0x01)
 
 /**
- * \brief Defines the value 'FALSE' of the fmi-ls-bus.
+ * \brief Defines the value 'FALSE' of the FMI-LS-BUS.
  */
 #define FMI3_LS_BUS_FALSE ((fmi3UInt8)0x00)
 
