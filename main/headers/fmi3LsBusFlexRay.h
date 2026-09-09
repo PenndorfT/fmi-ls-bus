@@ -7,7 +7,7 @@ FMI-LS-BUS layered standard specification (https://github.com/modelica/fmi-ls-bu
 
 It should be used when creating FlexRay Network FMUs according to the FMI-LS-BUS layered standard.
 
-Copyright (C) 2023-2025 Modelica Association Project "FMI"
+Copyright (C) 2023-2026 Modelica Association Project "FMI"
               All rights reserved.
 
 This file is licensed by the copyright holders under the 2-Clause BSD License
@@ -235,7 +235,7 @@ typedef fmi3UInt8 fmi3LsBusFlexRayError;
  *      Network FMU starts a transmission using a 'Transmit' operation.
  */
 #define FMI3_LS_BUS_FLEXRAY_BUSERROR_PARAM_TX_CONFLICT \
-    ((fmi3LsBusFlexRayError)0x16)
+    ((fmi3LsBusFlexRayError)0x10)
 
 /** \} */
 
@@ -524,10 +524,12 @@ typedef struct
     fmi3LsBusFlexRayCycleId cycleId;      /**< The cycle the symbol is transmitted in. */
     fmi3LsBusFlexRayChannel channel;      /**< The channel(s) on which the symbol is transmitted. */
     fmi3LsBusFlexRaySymbolType type;      /**< The type of symbol. */
+    fmi3LsBusFlexRaySlotId slotId;        /**< The slot ID of the startup-frame in cases of a COLLISION_AVOIDANCE_SYMBOL */
+
 } fmi3LsBusFlexRayOperationSymbol;
 
 #if FMI3_LS_BUS_CHECK_OPERATION_SIZE == 1
-static_assert(sizeof(fmi3LsBusFlexRayOperationSymbol) == (8 + 1 + 1 + 1),
+static_assert(sizeof(fmi3LsBusFlexRayOperationSymbol) == (8 + 1 + 1 + 1 + 2),
               "'fmi3LsBusFlexRayOperationSymbol' does not match the expected data size");
 #endif
 
