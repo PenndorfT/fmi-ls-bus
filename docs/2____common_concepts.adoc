@@ -34,7 +34,8 @@ In such a setup, the High-Cut signal variables will miss all but the last value 
 
 If `triggered` output Clocks are used, the importer must ensure to schedule and potentially roll-back FMUs that have advanced their `fmi3DoStep` past such a (surprising) `triggered` Clock activation from another FMU.
 It is strongly recommended to avoid using `triggered` output Clocks and to instead use `time-based` Clocks to avoid these complications and potential performance problems.
-For time-based Clocks, the event times are known before a simulation step is started, and the importer can adapt the next `communicationStepSize` for all networked FMUs accordingly.
+For time-based Clocks, either the event times are known before a simulation step is started or the event is related to activity on a connected bus interface. Please refer to <<common-concepts-schedule-and-reaction>>
+In both cases the importer can adapt the next `communicationStepSize` for all networked FMUs accordingly.
 
 A `time-based` Clock can be `periodic` or `aperiodic`.
 Both allow defining Bus Communication Points with fixed or variable distances.
@@ -80,6 +81,15 @@ Selecting a suitable `intervalVariability` for sending Clocks allows the FMU (or
 
 Note: The statements regarding `aperiodic` and `periodic` Clocks and their impact on performance should be understood as general tendencies rather than universally valid truths, as other aspects such as baud rates and expected bus loads must be taken into account for a more precise estimate.
 ====
+
+=== Schedule-Driven and Reaction-Driven Communication [[common-concepts-schedule-and-reaction]]
+
+TODO: Describe
+
+* Schedule-Driven example is AUTOSAR, time-based tx-clock gets interval from internal scheduler, interval qualifier has to be set to `fmi3IntervalUnchanged` or `fmi3IntervalChanged`
+
+* Reaction-Driven is Gateway like in VDA (forwarding a received message without knowing a schedule) or LIN Slave (answering to a request without knowing a schedule),
+time-based tx-clock is set by the FMU based on the algorithm for reaction of an RX event, interval qualifier has to be set to `fmi3IntervalNotYetKnown`
 
 === System Compositions [[common-concepts-system-compositions]]
 
